@@ -1,4 +1,4 @@
-# ADORE (Autonomous Data Operations and Recovery Engine)
+## ADORE (Autonomous Data Operations and Recovery Engine)
 
 **Status:** 🏗️ *In Progress / Active Development*
 
