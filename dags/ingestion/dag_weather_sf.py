@@ -3,22 +3,16 @@ import os
 import requests
 from datetime import datetime, timezone, timedelta
 
-from airflow import DAG
-from airflow.operators.python import PythonOperator
+from airflow import DAG # type: ignore
+from airflow.operators.python import PythonOperator # pyright: ignore[reportMissingImports]
 
 from utils.bigquery_client import write_to_bigquery
-from google.cloud import bigquery
+from utils.schemas import WEATHER_SF_SCHEMA
+
 
 PROJECT_ID = os.environ["GCP_PROJECT_ID"]
 DATASET = os.environ["BQ_DATASET_RAW"]
 TABLE = "weather_sf"
-
-SCHEMA = [
-    bigquery.SchemaField("ingested_at", "TIMESTAMP"),
-    bigquery.SchemaField("source", "STRING"),
-    bigquery.SchemaField("raw_data", "STRING"),
-]
-
 
 def fetch_and_store_weather():
     url = os.environ["OPEN_METEO_BASE_URL"]
@@ -36,7 +30,7 @@ def fetch_and_store_weather():
         "raw_data": json.dumps(response.json()),
     }
 
-    write_to_bigquery(PROJECT_ID, DATASET, TABLE, [row], schema=SCHEMA)
+    write_to_bigquery(PROJECT_ID, DATASET, TABLE, [row], schema=WEATHER_SF_SCHEMA)
 
 
 with DAG(
