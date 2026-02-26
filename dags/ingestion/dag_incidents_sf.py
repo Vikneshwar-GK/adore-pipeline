@@ -15,7 +15,7 @@ DATASET = os.environ["BQ_DATASET_RAW"]
 TABLE = "incidents_sf"
 
 def fetch_and_store_incidents():
-    yesterday = (datetime.now(timezone.utc) - timedelta(days=1)).strftime("%Y-%m-%dT%H:%M:%S")
+    yesterday = (datetime.now(timezone.utc) - timedelta(days=1)).strftime("%Y-%m-%dT%H:%M:%S.000Z")
     params = {
         "$limit": 1000,
         "$order": "requested_datetime DESC",

@@ -23,10 +23,13 @@ def fetch_and_store_transit():
     response = requests.get("http://api.511.org/transit/TripUpdates", params=params)
     response.raise_for_status()
 
+    raw_content = response.content.decode("utf-8-sig")
+    json.loads(raw_content)  # raises if not valid JSON
+
     row = {
         "ingested_at": datetime.now(timezone.utc).isoformat(),
         "source": "511_transit_sf",
-        "raw_data": response.content.decode("utf-8-sig"),
+        "raw_data": raw_content,
     }
 
     write_to_bigquery(PROJECT_ID, DATASET, TABLE, [row], schema=TRANSIT_SF_SCHEMA)
