@@ -73,6 +73,8 @@ x-airflow-common:
     GCP_PROJECT_ID: ${GCP_PROJECT_ID}
     BQ_DATASET_RAW: ${BQ_DATASET_RAW}
     OPEN_METEO_BASE_URL: ${OPEN_METEO_BASE_URL}
+    API_511_TOKEN: ${API_511_TOKEN}
+    SF_311_APP_TOKEN: ${SF_311_APP_TOKEN}
   volumes:
     - ${AIRFLOW_PROJ_DIR:-.}/dags:/opt/airflow/dags
     - ${AIRFLOW_PROJ_DIR:-.}/logs:/opt/airflow/logs

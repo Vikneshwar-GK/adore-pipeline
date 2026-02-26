@@ -5,3 +5,15 @@ WEATHER_SF_SCHEMA = [
     bigquery.SchemaField("source", "STRING"),
     bigquery.SchemaField("raw_data", "STRING"),
 ]
+
+TRANSIT_SF_SCHEMA = [
+    bigquery.SchemaField("ingested_at", "TIMESTAMP"),
+    bigquery.SchemaField("source", "STRING"),
+    bigquery.SchemaField("raw_data", "STRING"),
+]
+
+INCIDENTS_SF_SCHEMA = [
+    bigquery.SchemaField("ingested_at", "TIMESTAMP"),
+    bigquery.SchemaField("source", "STRING"),
+    bigquery.SchemaField("raw_data", "STRING"),
+]
